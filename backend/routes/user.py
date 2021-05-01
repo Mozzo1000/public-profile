@@ -20,3 +20,18 @@ def user_register():
                         'access_token': access_token, 'refresh_token': refresh_token}), 201
     except:
         return jsonify({'message': 'Something went wrong'}), 500
+
+@user.route('/v1/user/login', methods=['POST'])
+def user_login():
+    current_user = User.find_by_email(request.json['email'])
+    if not current_user:
+        return jsonify({'message': 'Wrong email or password, please try again.'}), 404
+
+    if User.verify_hash(request.json['password'], current_user.password):
+        access_token = create_access_token(identity=request.json['email'])
+        refresh_token = create_refresh_token(identity=request.json['email'])
+
+        return jsonify({'logged_in_as': current_user.email, 'display_name': current_user.first_name,
+                        'access_token': access_token, 'refresh_token': refresh_token}), 201
+    else:
+        return jsonify({'message': 'Wrong username or password, please try again.'}), 401

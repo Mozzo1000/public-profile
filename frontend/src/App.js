@@ -1,17 +1,24 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
+import NavbarMenu from './components/Navbar'
 import useToken from './useToken';
 
 function App() {
   // eslint-disable-next-line
   const { token, setToken } = useToken();
-
+  if(token) {
+    return (
+      <Fragment>
+        <NavbarMenu />
+      </Fragment>
+    )
+  }
   return (
     <div>
+        <NavbarMenu />
         <h1>profile-picuture</h1>
-        <p>Logged in as: {JSON.parse(localStorage.getItem('auth'))['display_name']}</p>
         <BrowserRouter>
           <Switch>
             <Route path="/register">

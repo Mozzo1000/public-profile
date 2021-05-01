@@ -20,7 +20,7 @@ export default function Register({ setToken }) {
                 setStatus('Account registration complete, please login!');
                 data.json().then((data2) => {
                     console.log(data2)
-                    setToken(data2['access_token']);
+                    setToken(data2);
                 });
             }else if(data.status === 409) {
                 setStatus('There is already an account registered with this email.')

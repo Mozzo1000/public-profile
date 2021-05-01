@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
+import Profile from './components/Profile'
 import NavbarMenu from './components/Navbar'
 import useToken from './useToken';
 
@@ -12,13 +13,13 @@ function App() {
     return (
       <Fragment>
         <NavbarMenu />
+        <Profile auth={JSON.parse(localStorage.getItem('auth'))} />
       </Fragment>
     )
   }
   return (
     <div>
         <NavbarMenu />
-        <h1>profile-picuture</h1>
         <BrowserRouter>
           <Switch>
             <Route path="/register">

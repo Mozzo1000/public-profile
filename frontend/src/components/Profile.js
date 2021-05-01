@@ -9,7 +9,7 @@ export default function Profile({ auth }) {
                 <Container className="text-center">
                     <Image className="mx-auto" src="https://eu.ui-avatars.com/api/?size=128&background=random&name=Andreas+B" roundedCircle/>
                     <h2>{JSON.parse(localStorage.getItem('auth'))['display_name']}
-                    <Button className="" variant="outline-dark" size="sm"><PencilSquare/></Button></h2>
+                    <Button href="/settings" variant="outline-dark" size="sm"><PencilSquare/></Button></h2>
                 </Container>
             </Jumbotron>
         </div>

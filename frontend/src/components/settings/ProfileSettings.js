@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Col, Card, Button} from 'react-bootstrap';
 import nationalities from '../../utilities/Nationality';
 
-export default function ProfileSettings() {
+export default function ProfileSettings({data}) {
     const [save, setSave] = useState();
     const nationality_list = nationalities.map((nationality) => 
                                     <option>{nationality}</option>

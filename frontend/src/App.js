@@ -30,7 +30,7 @@ function App() {
               <Login setToken={setToken} />
             </Route>
             <Route path="/settings">
-              <Settings />
+              <Settings auth={JSON.parse(localStorage.getItem('auth'))}/>
             </Route>
           </Switch>
         </BrowserRouter>

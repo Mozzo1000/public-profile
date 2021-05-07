@@ -2,7 +2,16 @@ import React from 'react'
 import { Container, Tab, Col, Row, Nav, Card } from 'react-bootstrap';
 import ProfileSettings from './ProfileSettings'
 
-export default function Settings() {
+export default function Settings({ auth }) {
+    var bearer = 'Bearer ' + auth['access_token'];
+    const profile_data = fetch('/v1/user/settings', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    }).then(data => data.json())
+
     return(
         <Container>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -24,7 +33,7 @@ export default function Settings() {
             <Col>
             <Tab.Content>
                 <Tab.Pane eventKey="first">
-                <ProfileSettings/>
+                <ProfileSettings data={profile_data}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                 <p>hi 2</p>

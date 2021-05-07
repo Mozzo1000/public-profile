@@ -1,0 +1,11 @@
+{
+    "name": "public-profile",
+    "dependency": "backend/requirements.txt",
+    "devDependency": "",
+    "scripts": [
+        {
+            "web": "npm start --prefix frontend/",
+            "api": "python backend/app.py"
+        }
+    ]
+}

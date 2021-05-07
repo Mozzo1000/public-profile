@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Col, Card, Button} from 'react-bootstrap';
 import nationalities from '../../utilities/Nationality';
 
 export default function ProfileSettings() {
+    const [save, setSave] = useState();
     const nationality_list = nationalities.map((nationality) => 
                                     <option>{nationality}</option>
                                 );
+
+    const handleChange = (event) => {
+        setSave(true);
+    }
+    
     return(
         <Card>
             <Card.Body>
-                <Card.Title>Your profile information <Button disabled>Save</Button></Card.Title>
+                <Card.Title>Your profile information {save ? (<Button>Save</Button>): <Button disabled>Save</Button>}</Card.Title>
                 <hr />
-                <Form>
+                <Form onChange={handleChange}>
                     <Form.Row>
                         <Form.Group as={Col} controlId="form_firstname">
                             <Form.Label>First name</Form.Label>

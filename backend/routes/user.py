@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, get_jwt_identity, get_jwt)
-from database import User
+from database import User, UserSchema
 
 user = Blueprint('user', __name__)
     
@@ -35,3 +35,11 @@ def user_login():
                         'access_token': access_token, 'refresh_token': refresh_token}), 201
     else:
         return jsonify({'message': 'Wrong username or password, please try again.'}), 401
+
+
+@user.route('/v1/user/settings', methods=['GET'])
+@jwt_required()
+def get_users_settings():
+    user_schema = UserSchema()
+    user = User.query.filter_by(email=get_jwt_identity()).first()
+    return user_schema.dump(user)

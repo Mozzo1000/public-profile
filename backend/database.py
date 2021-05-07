@@ -1,7 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
+ma = Marshmallow()
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -34,3 +36,16 @@ class User(db.Model):
     @staticmethod
     def verify_hash(password, hash):
         return check_password_hash(hash, password)
+
+class UserSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = User
+
+    email = ma.auto_field()
+    first_name = ma.auto_field()
+    last_name = ma.auto_field()
+    date_of_birth = ma.auto_field()
+    place_of_birth = ma.auto_field()
+    gender = ma.auto_field()
+    nationality = ma.auto_field()
+    
